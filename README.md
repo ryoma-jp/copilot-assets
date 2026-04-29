@@ -196,6 +196,12 @@ git submodule add https://github.com/ryoma-jp/copilot-assets.git .github
 git submodule update --init --recursive
 ```
 
+After adding the submodule, reload VS Code once so the workspace view and settings are refreshed.
+
+1. Open the Command Palette (`Ctrl+Shift+P`)
+2. Search for `Reload Window`
+3. Click `Developer: Reload Window`
+
 ### Updating the Submodule
 
 To pull the latest updates from `copilot-assets`:

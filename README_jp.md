@@ -196,6 +196,12 @@ git submodule add https://github.com/your-org/copilot-assets.git .github
 git submodule update --init --recursive
 ```
 
+Submodule 追加後は、ワークスペース表示と設定反映のために VS Code を一度リロードしてください。
+
+1. コマンドパレットを開く（`Ctrl+Shift+P`）
+2. `Reload Window` で検索
+3. `Developer: Reload Window` をクリック
+
 ### Submodule の更新
 
 `copilot-assets` の最新の更新を取り込む場合は以下を実行します。
