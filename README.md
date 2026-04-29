@@ -192,8 +192,18 @@ Skills are reusable operational procedures defined in `skills/*/SKILL.md`.
 In your target repository:
 
 ```bash
-git submodule add https://github.com/your-org/copilot-assets.git .github
+git submodule add https://github.com/ryoma-jp/copilot-assets.git .github
 git submodule update --init --recursive
+```
+
+### Updating the Submodule
+
+To pull the latest updates from `copilot-assets`:
+
+```bash
+git submodule update --remote .github
+git add .github
+git commit -m "chore: update copilot-assets submodule"
 ```
 
 ### Reference Agents and Skills

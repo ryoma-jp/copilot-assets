@@ -196,6 +196,16 @@ git submodule add https://github.com/your-org/copilot-assets.git .github
 git submodule update --init --recursive
 ```
 
+### Submodule の更新
+
+`copilot-assets` の最新の更新を取り込む場合は以下を実行します。
+
+```bash
+git submodule update --remote .github
+git add .github
+git commit -m "chore: update copilot-assets submodule"
+```
+
 ### エージェントとスキルの参照先
 
 Submodule のパスをそのまま参照します。
