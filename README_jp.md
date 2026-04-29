@@ -212,13 +212,65 @@ your-project/
 │   ├── skills/
 │   ├── README.md
 │   ├── tasks/
-│   │   ├── current.md
+│   │   ├── current.yaml
 │   │   └── archive/
 │   ├── copilot-instructions.md
 │   └── CONVENTIONS.md
 ├── src/
 └── ...
 ```
+
+### `current.yaml` の運用ルール
+
+- Project Manager は要件ごとに `current.yaml` を1つ作成する。
+- 要件完了判定はルートの `completion_condition_for_requirement` のみを使用する。
+- タスク完了判定は各タスクの `done_criteria` を使用する。
+- すべてのタスクに、タスク単位ブランチ運用のため `branch_name` を必須で設定する。
+- 全タスク完了かつ要件完了条件を満たしたら `tasks/archive/` へ `current.yaml` を移送する。
+- 新規要件ファイルを作成する際は `skills/task-management/current.template.yaml` を初期テンプレートとして利用する。
+
+### `current.yaml` 項目一覧
+
+#### ルート項目
+
+| 項目 | 型 | 必須 | 説明 |
+| --- | --- | --- | --- |
+| `request_id` | string | yes | 要件を一意に識別するID。 |
+| `requirement_summary` | string | yes | 要件の目的と範囲を簡潔に示す要約。 |
+| `created_at` | string (ISO 8601) | yes | 要件ファイル作成日時。 |
+| `updated_at` | string (ISO 8601) | yes | 要件ファイルの最終更新日時。 |
+| `completion_condition_for_requirement` | array of string | yes | 要件全体の完了条件。ルートの完了キーはこれのみ使用する。 |
+| `tasks` | array of object | yes | 逐次実行とハンドオフのためのタスク配列。 |
+
+#### タスク項目 (`tasks[]`)
+
+| 項目 | 型 | 必須 | 説明 |
+| --- | --- | --- | --- |
+| `task_id` | string | yes | 要件内で一意なタスクID。 |
+| `title` | string | yes | タスク名。 |
+| `owner` | string | yes | 実行責任を持つエージェント。 |
+| `status` | enum | yes | タスク状態: `todo`, `in_progress`, `blocked`, `done`。 |
+| `handoff_to` | string | yes | タスク完了後の次担当。 |
+| `branch_name` | string | yes | タスク単位ブランチ開発に使うブランチ名。 |
+| `inputs` | object | yes | タスク実行に必要な構造化入力（objective, scope, constraints, expected_output, acceptance）。 |
+| `done_criteria` | array of string | yes | タスク完了判定に使う条件。 |
+| `blockers` | object | yes | タスク進行を通常手順で継続できない状態を明示的に追跡するための情報。 |
+
+#### ブロッカーの定義と項目
+
+ブロッカーは単なる遅延ではなく、現時点の制約下で担当者が意味のある進捗を継続できない状態を指します。ブロッカーが存在し、直ちに有効な回避策がない場合は、タスク `status` を `blocked` に設定します。
+
+| 項目 | 型 | 必須 | 説明 |
+| --- | --- | --- | --- |
+| `reason` | string | yes | ブロッカーの直接原因。例: 依存未解決、意思決定待ち、環境障害、権限不足。 |
+| `impact` | string | yes | 何が進められないか、どの範囲に影響するか、遅延リスクを記述する。 |
+| `workaround` | string | yes | 一時的に前進するための回避策。安全な回避策がない場合はその旨を明記する。 |
+| `unblock_condition` | string | yes | 通常進行に戻すための客観的条件。例: 依存PRのマージ、方針承認、アクセス付与。 |
+
+運用ガイド:
+- 記述は抽象的な表現ではなく、事実ベースで実行可能な内容にする。
+- 状態変更や新情報が出たらブロッカー項目を更新する。
+- 解消時はブロッカー情報をクリアし、タスクを `in_progress` に戻す。
 
 ---
 

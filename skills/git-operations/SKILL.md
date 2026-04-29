@@ -17,7 +17,7 @@ user-invocable: true
 ## Baseline Workflow
 1. Inspect state with `git status`, current branch, and diff summary.
 2. Verify branch strategy:
-   - feature work on topic branch
+   - feature work on task branch tracked by `branch_name` in `.github/tasks/current.yaml`
    - avoid direct commit to protected branches
 3. Stage intentionally:
    - include only relevant hunks/files
@@ -33,6 +33,13 @@ user-invocable: true
    - ensure branch is push-ready
 7. Push safely:
    - avoid force push unless explicitly approved and policy-compliant
+   - push each task branch after creation and after meaningful updates
+
+## Task-Driven Branch Policy
+1. Read active task `branch_name` from `.github/tasks/current.yaml` before starting implementation.
+2. Create or switch to the task branch and keep commits scoped to that task.
+3. Complete the task, merge to `main` according to repository policy, and update task status.
+4. After all requirement tasks are merged, perform final `main` sync check and push.
 
 ## Common Operations Coverage
 - Status triage: staged/unstaged/untracked review

@@ -212,13 +212,65 @@ your-project/
 │   ├── skills/
 │   ├── README.md
 │   ├── tasks/
-│   │   ├── current.md
+│   │   ├── current.yaml
 │   │   └── archive/
 │   ├── copilot-instructions.md
 │   └── CONVENTIONS.md
 ├── src/
 └── ...
 ```
+
+### `current.yaml` Operation Rules
+
+- Project Manager creates one `current.yaml` per requirement.
+- Root-level requirement completion uses `completion_condition_for_requirement` only.
+- Task-level completion uses each task's `done_criteria`.
+- Every task must define `branch_name` for branch-per-task delivery.
+- When all tasks are done and requirement completion condition is satisfied, move `current.yaml` to `tasks/archive/`.
+- Start from `skills/task-management/current.template.yaml` when bootstrapping a new requirement file.
+
+### `current.yaml` Field Reference
+
+#### Root Keys
+
+| Key | Type | Required | Description |
+| --- | --- | --- | --- |
+| `request_id` | string | yes | Unique requirement identifier. |
+| `requirement_summary` | string | yes | Short summary of the requirement scope and intent. |
+| `created_at` | string (ISO 8601) | yes | Requirement file creation timestamp. |
+| `updated_at` | string (ISO 8601) | yes | Last update timestamp for the requirement file. |
+| `completion_condition_for_requirement` | array of string | yes | Requirement-level completion conditions. This is the only root completion key. |
+| `tasks` | array of object | yes | Ordered task list for sequential execution and handoff. |
+
+#### Task Keys (`tasks[]`)
+
+| Key | Type | Required | Description |
+| --- | --- | --- | --- |
+| `task_id` | string | yes | Unique task identifier inside the requirement. |
+| `title` | string | yes | Human-readable task name. |
+| `owner` | string | yes | Responsible agent for execution. |
+| `status` | enum | yes | Task state: `todo`, `in_progress`, `blocked`, `done`. |
+| `handoff_to` | string | yes | Next owner after task completion. |
+| `branch_name` | string | yes | Dedicated branch name for branch-per-task development. |
+| `inputs` | object | yes | Structured task context (objective, scope, constraints, expected output, acceptance). |
+| `done_criteria` | array of string | yes | Task-level completion criteria used for status transition to `done`. |
+| `blockers` | object | yes | Blocking conditions that prevent normal task progress and require explicit tracking until unblocked. |
+
+#### Blocker Definition and Fields
+
+A blocker is not just a delay. It is a condition that prevents the owner from making meaningful forward progress under current constraints. If a blocker exists and no immediate workaround is available, task `status` should be set to `blocked`.
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `reason` | string | yes | The concrete root cause of the blocker (for example, missing dependency, unresolved decision, environment outage, permission issue). |
+| `impact` | string | yes | What cannot proceed because of the blocker, including affected scope and expected delay risk. |
+| `workaround` | string | yes | Temporary mitigation to continue partial progress. Leave an explicit note if no safe workaround exists. |
+| `unblock_condition` | string | yes | Objective condition that must be met to resume normal execution (for example, dependency merged, decision approved, access granted). |
+
+Operational guidance:
+- Keep blocker statements factual and actionable, not generic.
+- Update blocker fields whenever status changes or new information appears.
+- Clear blocker details after resolution and move task back to `in_progress`.
 
 ---
 

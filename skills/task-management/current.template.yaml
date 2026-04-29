@@ -1,0 +1,61 @@
+request_id: REQ-0001
+requirement_summary: "Describe the requirement in one paragraph"
+created_at: "2026-04-29T00:00:00Z"
+updated_at: "2026-04-29T00:00:00Z"
+completion_condition_for_requirement:
+  - "All tasks are done"
+  - "User acceptance criteria are met"
+
+tasks:
+  - task_id: TASK-001
+    title: "Define architecture and interfaces"
+    owner: design-reviewer
+    status: in_progress
+    handoff_to: backend-developer
+    branch_name: task-001-architecture-interface
+    inputs:
+      objective: "Produce design artifacts and review notes"
+      scope:
+        - "api contract"
+        - "data model"
+      constraints:
+        - "Preserve existing public endpoints unless explicitly approved"
+      expected_output:
+        - "Design artifact document"
+        - "Decision notes"
+      acceptance:
+        - "Design reviewer marks outcome as approve or approve with changes"
+    done_criteria:
+      - "Design artifacts committed"
+      - "Review result recorded"
+    blockers:
+      reason: ""
+      impact: ""
+      workaround: ""
+      unblock_condition: ""
+
+  - task_id: TASK-002
+    title: "Implement backend changes"
+    owner: backend-developer
+    status: todo
+    handoff_to: code-reviewer
+    branch_name: task-002-backend-implementation
+    inputs:
+      objective: "Implement backend/API updates"
+      scope:
+        - "django_project/app"
+      constraints:
+        - "No unrelated refactors"
+      expected_output:
+        - "Updated backend code"
+        - "Minimal tests"
+      acceptance:
+        - "Task-level checks pass"
+    done_criteria:
+      - "Code and tests are updated"
+      - "Behavior matches requirement"
+    blockers:
+      reason: ""
+      impact: ""
+      workaround: ""
+      unblock_condition: ""

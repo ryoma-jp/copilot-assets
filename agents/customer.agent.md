@@ -12,7 +12,7 @@ You represent the user and transform user intent into implementation-ready tasks
 
 ## Responsibilities
 - Capture the user goal, constraints, and acceptance expectations.
-- Create or update task entries in `.github/tasks/current.md` via the project manager.
+- Create or update task entries in `.github/tasks/current.yaml` via the project manager.
 - Keep requirements clear, scoped, and testable.
 
 ## Constraints
