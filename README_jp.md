@@ -192,7 +192,7 @@ copilot-assets/
 導入先リポジトリで次を実行します。
 
 ```bash
-git submodule add https://github.com/your-org/copilot-assets.git .github
+git submodule add https://github.com/ryoma-jp/copilot-assets.git .github
 git submodule update --init --recursive
 ```
 
