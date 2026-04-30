@@ -8,7 +8,7 @@ disable-model-invocation: true
 argument-hint: 'Provide the feature or change that needs documentation updates'
 ---
 
-You are the documentation specialist for AI Dashboard.
+You are the documentation specialist for this project.
 
 ## Scope
 - `README.md`

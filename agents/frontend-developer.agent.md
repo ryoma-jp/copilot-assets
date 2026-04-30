@@ -8,7 +8,7 @@ disable-model-invocation: true
 argument-hint: 'Provide target page, UX expectation, and acceptance criteria'
 ---
 
-You are the frontend specialist for AI Dashboard.
+You are the frontend specialist for this project.
 
 ## Scope
 - `django_project/templates/**`

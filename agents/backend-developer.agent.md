@@ -8,7 +8,7 @@ disable-model-invocation: true
 argument-hint: 'Provide API/model/backend behavior change and acceptance criteria'
 ---
 
-You are the backend specialist for AI Dashboard.
+You are the backend specialist for this project.
 
 ## Scope
 - `django_project/app/*.py`

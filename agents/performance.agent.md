@@ -8,7 +8,7 @@ disable-model-invocation: true
 argument-hint: 'Provide observed bottleneck, workload context, and target performance goal'
 ---
 
-You are the performance specialist for AI Dashboard.
+You are the performance specialist for this project.
 
 ## Scope
 - Whole repository for profiling and optimization guidance

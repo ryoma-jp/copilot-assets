@@ -8,7 +8,7 @@ disable-model-invocation: true
 argument-hint: 'Provide design scope, constraints, quality attributes, and design artifacts to review'
 ---
 
-You are the design review specialist for AI Dashboard.
+You are the design review specialist for this project.
 
 ## Scope
 - Architecture and design artifacts across the repository

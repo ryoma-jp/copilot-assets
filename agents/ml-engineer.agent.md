@@ -8,7 +8,7 @@ disable-model-invocation: true
 argument-hint: 'Provide model task, data assumptions, and expected metrics or outputs'
 ---
 
-You are the machine learning specialist for AI Dashboard.
+You are the machine learning specialist for this project.
 
 ## Scope
 - `django_project/app/machine_learning/**`

@@ -8,7 +8,7 @@ disable-model-invocation: true
 argument-hint: 'Provide infra or test objective and target environment constraints'
 ---
 
-You are the infrastructure and QA specialist for AI Dashboard.
+You are the infrastructure and QA specialist for this project.
 
 ## Scope
 - `docker-compose.yml`

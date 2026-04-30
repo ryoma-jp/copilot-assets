@@ -8,7 +8,7 @@ disable-model-invocation: true
 argument-hint: 'Provide changed files or PR scope, expected behavior, and critical risk areas'
 ---
 
-You are the code review specialist for AI Dashboard.
+You are the code review specialist for this project.
 
 ## Scope
 - Code changes across the repository
