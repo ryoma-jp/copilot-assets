@@ -45,6 +45,8 @@ Notes:
 - Never delegate directly; always route through the owner field matching in current.yaml.
 - Never assign parallel `in_progress` tasks.
 - Do not skip `done_criteria` checks.
+- Do not treat a task as started unless active branch equals the task `branch_name`.
+- Do not mark a task `done` until the task branch has been merged into `main`.
 - Keep edits incremental and localized.
 - If a task's owner is not in your agents list, mark it as `blocked` with reason: "Owner [name] not in delegable agent list".
 
@@ -59,7 +61,11 @@ Notes:
 ### Phase 2: Specialist Delegation Loop
 5. **Read current.yaml** and identify the task with `status: in_progress`.
 6. **Extract the owner field** from that task (e.g., `design-reviewer`, `backend-developer`, `documentation`).
-7. **Match the owner to a delegable agent** from this list:
+7. **Define branch bootstrap requirement** for the active task:
+    - required branch: task `branch_name`
+    - required command: `git switch <branch_name> || git switch -c <branch_name>`
+    - required proof from specialist: `git branch --show-current` output equals `branch_name`
+8. **Match the owner to a delegable agent** from this list:
    - `design-reviewer`
    - `backend-developer`
    - `frontend-developer`
@@ -68,26 +74,35 @@ Notes:
    - `code-reviewer`
    - `documentation`
    - `performance`
-8. **Invoke the matched agent** with:
+9. **Invoke the matched agent** with:
    - Full task object (including `task_id`, `title`, `inputs`, `done_criteria`)
    - Path to current.yaml for context
+    - Branch bootstrap requirement and proof requirement
    - Clear completion expectations
 
 ### Phase 3: Task Completion & Handoff
-9. Receive specialist completion report and validate against `done_criteria`.
-10. **Update task status**:
-    - Move to `done` if validation passes
-    - Move to `blocked` with reason if validation fails or blocker found
-11. **Advance to next task**:
+10. Receive specialist completion report and validate against `done_criteria`.
+11. Verify branch proof in specialist output:
+    - reported active branch must equal task `branch_name`
+    - if proof is missing or mismatched, set `status: blocked` and do not hand off
+12. **Merge task branch to `main`** (only after both validations pass):
+    - `git switch main && git pull`
+    - `git merge --no-ff <branch_name> -m "merge: <task_id> <title>"`
+    - If merge conflicts occur, set `status: blocked` with conflict details and do not advance
+13. **Update task status**:
+    - Move to `done` after successful merge
+    - Move to `blocked` with reason if validation fails, branch mismatch, or merge conflict
+14. **Advance to next task**:
     - Read `handoff_to` field from completed task
     - Find the next `todo` task and set its status to `in_progress`
     - Loop back to step 5
+    - Ensure the next task branches off the updated `main`
 
 ### Phase 4: Requirement Completion
-12. When all tasks are `done` and `completion_condition_for_requirement` is met:
+14. When all tasks are `done` and `completion_condition_for_requirement` is met:
     - Archive `current.yaml` to `.github/tasks/archive/`
     - Prepare for next requirement
-13. Provide final integrated status report to customer.
+15. Provide final integrated status report to customer.
 
 ## Specialist Routing Guide
 
@@ -117,18 +132,18 @@ Context: {
   branch_name: [from current.yaml]
   current_yaml_path: ".github/tasks/current.yaml"
 }
-Expected Result: Specialist updates branch and reports completion against done_criteria.
+Expected Result: Specialist bootstraps/switches to task branch, reports active branch proof, and reports completion against done_criteria.
 ```
 
 ### After Specialist Completion
 1. Validate that all `done_criteria` items are satisfied.
-2. Update task status in current.yaml:
-   - If all criteria met: `status: done`
-   - If blocker found: `status: blocked` + blocker details
-3. If `done`, read `handoff_to` field and set that task to `in_progress`.
-4. Repeat delegation loop.
-
-## Output Format
+2. Validate that reported active branch equals task `branch_name`.
+3. Merge task branch into `main`.
+4. Update task status in current.yaml:
+   - If all criteria met and merge succeeded: `status: done`
+   - If blocker found, branch mismatch, or merge conflict: `status: blocked` + blocker details
+5. If `done`, read `handoff_to` field and set that task to `in_progress`.
+6. Repeat delegation loop.
 - Queue delta
 - Active task
 - Completed tasks

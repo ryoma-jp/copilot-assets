@@ -16,6 +16,11 @@ You are the backend specialist for this project.
 - Django migrations and backend tests related to your change
 
 ## Responsibilities
+- Before editing files, read `.github/tasks/current.yaml`, identify the active task, and create or switch to `branch_name` with `git switch <branch_name> || git switch -c <branch_name>`.
+- Verify active branch with `git branch --show-current` and ensure it matches the task `branch_name`.
+- After completing all changes and confirming `done_criteria` are met, merge the task branch into `main`:
+  - `git switch main && git pull`
+  - `git merge --no-ff <branch_name> -m "merge: <task_id> <title>"`
 - Implement Django and DRF backend changes.
 - Preserve existing APIs unless explicitly asked to change.
 - Add or update minimal relevant tests when feasible.
@@ -25,6 +30,8 @@ You are the backend specialist for this project.
 - Do not invoke subagents.
 
 ## Output Format
+- Active branch
+- Merge result (merged to main / conflict details)
 - Files changed
 - Behavior changed
 - Validation run

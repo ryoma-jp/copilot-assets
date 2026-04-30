@@ -242,6 +242,8 @@ your-project/
 - Root-level requirement completion uses `completion_condition_for_requirement` only.
 - Task-level completion uses each task's `done_criteria`.
 - Every task must define `branch_name` for branch-per-task delivery.
+- Before moving a task to `in_progress`, create or switch to the task branch matching `branch_name`.
+- Before marking a task `done`, merge the task branch into `main` with `git merge --no-ff`. If a merge conflict occurs, set `status: blocked` and record details in `blockers`.
 - When all tasks are done and requirement completion condition is satisfied, move `current.yaml` to `tasks/archive/`.
 - Start from `skills/task-management/current.template.yaml` when bootstrapping a new requirement file.
 

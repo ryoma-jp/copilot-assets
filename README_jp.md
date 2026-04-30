@@ -242,6 +242,8 @@ your-project/
 - 要件完了判定はルートの `completion_condition_for_requirement` のみを使用する。
 - タスク完了判定は各タスクの `done_criteria` を使用する。
 - すべてのタスクに、タスク単位ブランチ運用のため `branch_name` を必須で設定する。
+- タスクを `in_progress` にする前に、`branch_name` のブランチを作成または切替すること。
+- タスクを `done` にする前に、タスクブランチを `git merge --no-ff` で `main` へマージすること。マージコンフリクトが発生した場合は `status: blocked` にして `blockers` に詳細を記録する。
 - 全タスク完了かつ要件完了条件を満たしたら `tasks/archive/` へ `current.yaml` を移送する。
 - 新規要件ファイルを作成する際は `skills/task-management/current.template.yaml` を初期テンプレートとして利用する。
 
