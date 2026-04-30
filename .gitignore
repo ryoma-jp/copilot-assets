@@ -1,0 +1,15 @@
+# Ignore everything by default
+*
+
+# Keep this ignore file itself
+!.gitignore
+
+# Keep top-level tracked files
+!LICENSE
+!README*
+
+# Keep allowed directories and their contents
+!agents/
+!agents/**
+!skills/
+!skills/**
