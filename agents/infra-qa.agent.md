@@ -3,7 +3,7 @@ name: infra-qa
 description: 'Use for Docker Compose, nginx, scripts, runtime environment checks, and test execution strategy.'
 tools: [read, edit, search, execute]
 agents: []
-user-invocable: true
+user-invocable: false
 disable-model-invocation: true
 argument-hint: 'Provide infra or test objective and target environment constraints'
 ---

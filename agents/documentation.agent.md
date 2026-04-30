@@ -3,7 +3,7 @@ name: documentation
 description: 'Use for README, usage guides, architecture notes, and developer documentation updates.'
 tools: [read, edit, search, execute]
 agents: []
-user-invocable: true
+user-invocable: false
 disable-model-invocation: true
 argument-hint: 'Provide the feature or change that needs documentation updates'
 ---

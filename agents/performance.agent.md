@@ -3,7 +3,7 @@ name: performance
 description: 'Use for performance analysis and optimization proposals across backend, frontend, ML, and infrastructure layers.'
 tools: [read, edit, search, execute]
 agents: []
-user-invocable: true
+user-invocable: false
 disable-model-invocation: true
 argument-hint: 'Provide observed bottleneck, workload context, and target performance goal'
 ---

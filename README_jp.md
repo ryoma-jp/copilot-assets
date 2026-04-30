@@ -202,6 +202,38 @@ Submodule 追加後は、ワークスペース表示と設定反映のために 
 2. `Reload Window` で検索
 3. `Developer: Reload Window` をクリック
 
+### Nested Subagents の有効化（必須）
+
+本フレームワークは以下の3階層のネストされたサブエージェント構成で動作します。
+
+```
+User → Customer (level 0) → Project Manager (level 1, subagent) → Specialists (level 2, sub-subagents)
+```
+
+VS Code のデフォルト設定では、サブエージェントが更にサブエージェントを呼び出すことはできません。  
+導入先リポジトリの `.vscode/settings.json` に以下を追加してください。
+
+```json
+{
+  "chat.subagents.allowInvocationsFromSubagents": true
+}
+```
+
+この設定がない場合、Project Manager が Customer のサブエージェントとして動作中にスペシャリストエージェントを呼び出せません。
+
+### エージェント呼び出しモデル
+
+| エージェント | `user-invocable` | `disable-model-invocation` | 呼び出し元 |
+|-------------|-----------------|---------------------------|-----------|
+| customer | `true` | — | ユーザ（唯一の入口） |
+| project-manager | `false` | — | customer（`agents` リスト経由） |
+| backend-developer, frontend-developer, ml-engineer | `false` | `true` | project-manager（`agents` リストによる override） |
+| design-reviewer, code-reviewer | `false` | `true` | project-manager（`agents` リストによる override） |
+| infra-qa, documentation, performance | `false` | `true` | project-manager（`agents` リストによる override） |
+
+`disable-model-invocation: true` はスペシャリストが任意のエージェントから呼び出されることを防ぎます。  
+project-manager の `agents` 明示リストがこの制限を override し、制御された経路からのみアクセスを許可します。
+
 ### Submodule の更新
 
 `copilot-assets` の最新の更新を取り込む場合は以下を実行します。

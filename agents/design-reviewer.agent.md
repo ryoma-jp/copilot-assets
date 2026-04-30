@@ -3,7 +3,7 @@ name: design-reviewer
 description: 'Use for architecture and design reviews before implementation. Evaluate boundaries, contracts, quality attributes, and delivery readiness using the design-review skill.'
 tools: [read, search]
 agents: []
-user-invocable: true
+user-invocable: false
 disable-model-invocation: true
 argument-hint: 'Provide design scope, constraints, quality attributes, and design artifacts to review'
 ---

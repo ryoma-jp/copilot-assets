@@ -3,7 +3,7 @@ name: ml-engineer
 description: 'Use for machine learning pipeline changes including training, inference, model utilities, and dataset processing.'
 tools: [read, edit, search, execute]
 agents: []
-user-invocable: true
+user-invocable: false
 disable-model-invocation: true
 argument-hint: 'Provide model task, data assumptions, and expected metrics or outputs'
 ---

@@ -3,7 +3,7 @@ name: frontend-developer
 description: 'Use for Django template, CSS, and JavaScript implementation in UI pages under templates and static assets.'
 tools: [read, edit, search, execute]
 agents: []
-user-invocable: true
+user-invocable: false
 disable-model-invocation: true
 argument-hint: 'Provide target page, UX expectation, and acceptance criteria'
 ---

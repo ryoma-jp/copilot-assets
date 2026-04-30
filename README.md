@@ -202,6 +202,36 @@ After adding the submodule, reload VS Code once so the workspace view and settin
 2. Search for `Reload Window`
 3. Click `Developer: Reload Window`
 
+### Enable Nested Subagents (Required)
+
+This framework uses a three-level nested subagent chain:
+
+```
+User → Customer (level 0) → Project Manager (level 1, subagent) → Specialists (level 2, sub-subagents)
+```
+
+By default, VS Code does not allow subagents to spawn further subagents. Enable the following setting in your workspace `.vscode/settings.json`:
+
+```json
+{
+  "chat.subagents.allowInvocationsFromSubagents": true
+}
+```
+
+Without this setting, Project Manager cannot delegate to specialist agents when running as a Customer subagent.
+
+### Agent Invocation Model
+
+| Agent | `user-invocable` | `disable-model-invocation` | Invoked by |
+|-------|-----------------|---------------------------|------------|
+| customer | `true` | — | User (entry point) |
+| project-manager | `false` | — | customer (via `agents` list) |
+| backend-developer, frontend-developer, ml-engineer | `false` | `true` | project-manager (via `agents` list override) |
+| design-reviewer, code-reviewer | `false` | `true` | project-manager (via `agents` list override) |
+| infra-qa, documentation, performance | `false` | `true` | project-manager (via `agents` list override) |
+
+`disable-model-invocation: true` protects specialists from being invoked by arbitrary agents. The explicit `agents` list in project-manager overrides this restriction, granting controlled access.
+
 ### Updating the Submodule
 
 To pull the latest updates from `copilot-assets`:

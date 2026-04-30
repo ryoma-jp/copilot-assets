@@ -3,7 +3,7 @@ name: code-reviewer
 description: 'Use for post-implementation code review focused on correctness, regression risk, security, test adequacy, and merge readiness using the code-review skill.'
 tools: [read, search]
 agents: []
-user-invocable: true
+user-invocable: false
 disable-model-invocation: true
 argument-hint: 'Provide changed files or PR scope, expected behavior, and critical risk areas'
 ---

@@ -3,7 +3,7 @@ name: backend-developer
 description: 'Use for Django backend implementation, DRF API changes, model updates, serializers, and backend tests in app and project modules.'
 tools: [read, edit, search, execute]
 agents: []
-user-invocable: true
+user-invocable: false
 disable-model-invocation: true
 argument-hint: 'Provide API/model/backend behavior change and acceptance criteria'
 ---
