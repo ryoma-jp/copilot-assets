@@ -22,9 +22,10 @@ user-invocable: true
 4. Convert the incoming request into small tasks with clear task-level `done_criteria`.
 5. For each task, set: `task_id`, `title`, `owner`, `status`, `handoff_to`, `branch_name`, `inputs`, `done_criteria`, and `blockers`.
 6. Ensure only one task is `in_progress`.
-7. Before moving any task to `in_progress`, create or switch to the task branch from `branch_name` using:
+7. Before moving any task to `in_progress`, the project manager must create or switch to the task branch from `branch_name` using:
    - `git switch <branch_name> || git switch -c <branch_name>`
    - `git branch --show-current` and verify it matches `branch_name`
+   - Record the verified output as `branch_proof` in the PM report before delegating to the specialist.
 8. If branch bootstrap fails or active branch does not match `branch_name`, keep the task out of `in_progress` and set `status: blocked` with concrete blocker details.
 9. Assign each task to one owner from:
    - `customer`

@@ -1,7 +1,7 @@
 ---
 name: customer
 description: 'Use for user requirement intake, clarification, and converting requests into project tasks for sequential execution. Delegate implementation only to project-manager.'
-tools: [read, search, agent]
+tools: [read, search, agent, execute]
 agents: [project-manager]
 user-invocable: true
 argument-hint: 'Provide the user request and expected business outcome'
