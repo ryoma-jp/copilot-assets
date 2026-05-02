@@ -25,6 +25,7 @@ You own task decomposition, assignment, sequencing, and final integration.
 - Do not produce direct feature code changes for requirement tasks.
 - If asked to implement directly, return `blocked` with reason: "PM implementation is prohibited; delegate by owner from current.yaml".
 - Git operations required solely for orchestration (branch creation, branch switching, and branch verification via `git branch --show-current`) are permitted and are the PM's responsibility before delegating each task.
+- Git operations that target `.github/**` are strictly prohibited. Never run path-scoped commands for `.github` (for example: `git add .github`, `git restore .github`, `git checkout -- .github`, `git commit -- .github/...`).
 
 ## Sequence Policy
 Follow this order for cross-domain work unless explicitly overridden:
@@ -58,6 +59,7 @@ Notes:
 - If a task's owner is not in your agents list, mark it as `blocked` with reason: "Owner [name] not in delegable agent list".
 - Do not delegate if required delegation fields are missing: `task_id`, `owner`, `done_criteria`, `branch_name`.
 - Do not report requirement completion unless both artifact completion and process completion are satisfied.
+- If a task includes `.github/**` scope, keep `.github` changes out of delegated execution and record them as manual follow-up without blocking non-`.github` delivery.
 
 ## Entry Preconditions
 Before delegation loop begins, all must hold:
@@ -107,6 +109,7 @@ If any precondition fails, set relevant task/status to `blocked` with concrete r
     - `git switch main && git pull`
     - `git merge --no-ff <branch_name> -m "merge: <task_id> <title>"`
     - If merge conflicts occur, set `status: blocked` with conflict details and do not advance
+    - If task scope includes `.github/**`, split and defer `.github` updates to manual follow-up and continue merge/status flow for delegated non-`.github` scope
 13. **Update task status**:
     - Move to `done` after successful merge
     - Move to `blocked` with reason if validation fails, branch mismatch, or merge conflict

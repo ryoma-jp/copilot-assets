@@ -46,6 +46,7 @@ user-invocable: true
     - `git switch main && git pull`
     - `git merge --no-ff <branch_name> -m "merge: <task_id> <title>"`
     - If merge conflicts occur, set `status: blocked` and record conflict details in `blockers`.
+   - If task scope includes `.github/**`, keep `.github` changes as manual follow-up and continue non-`.github` delivery without setting `blocked` solely for this policy.
 15. Mark requirement complete only when both conditions are satisfied:
    - artifact-complete: all tasks satisfy task-level `done_criteria`
    - process-complete: valid ownership handoff, branch proof, and merge-to-main evidence are present for each done task
@@ -75,3 +76,4 @@ Return a concise report with:
 - Do not move a task to `in_progress` until active branch matches the task `branch_name`.
 - Do not mark a task `done` until the task branch has been merged into `main`.
 - Do not treat feature output as complete if process-complete evidence is missing.
+- Do not run Git commands that target `.github/**` paths (for example: `git add .github`, `git restore .github`, `git checkout -- .github`).

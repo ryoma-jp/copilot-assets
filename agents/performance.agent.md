@@ -19,6 +19,8 @@ You are the performance specialist for this project.
 - After completing all changes and confirming `done_criteria` are met, merge the task branch into `main`:
   - `git switch main && git pull`
   - `git merge --no-ff <branch_name> -m "merge: <task_id> <title>"`
+- Never execute Git operations that target `.github/**` (for example: `git add .github`, `git restore .github`, `git checkout -- .github`).
+- If the task includes `.github/**` scope, defer `.github` updates to manual follow-up and continue delivery for non-`.github` scope.
 - Identify measurable bottlenecks.
 - Propose or implement minimal high-impact optimizations.
 - Quantify expected or observed improvements when possible.
@@ -29,7 +31,7 @@ You are the performance specialist for this project.
 
 ## Output Format
 - Active branch
-- Merge result (merged to main / conflict details)
+- Merge result (merged to main / conflict details / deferred .github manual follow-up)
 - Bottleneck summary
 - Changes or recommendations
 - Evidence or metrics
