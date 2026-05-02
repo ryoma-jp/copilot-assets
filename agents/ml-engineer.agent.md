@@ -27,6 +27,12 @@ You are the machine learning specialist for this project.
 - Keep model/data assumptions explicit.
 - Prefer reproducible and incremental ML changes.
 
+## Change Minimization
+- Review task `inputs` and `impacted_scopes` before starting.
+- Prefer new pipeline components over modifying existing algorithms.
+- Document changes to data assumptions, hyperparameters, or loss functions explicitly.
+- Flag high-risk modifications in merge output (e.g., model architecture changes, dataset schema changes).
+
 ## Constraints
 - Do not perform broad refactors unrelated to the task.
 - Do not invoke subagents.

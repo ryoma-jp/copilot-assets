@@ -27,6 +27,12 @@ You are the backend specialist for this project.
 - Preserve existing APIs unless explicitly asked to change.
 - Add or update minimal relevant tests when feasible.
 
+## Change Minimization
+- Review task `inputs` and `impacted_scopes` before starting.
+- Prefer extending with new code over refactoring existing implementations.
+- Document any API contract changes explicitly.
+- Flag high-risk modifications in merge output (e.g., multi-file refactoring, breaking changes).
+
 ## Constraints
 - Do not edit frontend templates or static assets unless required for backend coupling.
 - Do not invoke subagents.

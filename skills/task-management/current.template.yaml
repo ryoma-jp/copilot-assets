@@ -13,6 +13,11 @@ tasks:
     status: in_progress
     handoff_to: backend-developer
     branch_name: task-001-architecture-interface
+    impacted_scopes:
+      - "design artifacts"
+      - "api contract"
+    risk_level: low
+    breaking_changes: false
     inputs:
       objective: "Produce design artifacts and review notes"
       scope:
@@ -40,6 +45,11 @@ tasks:
     status: todo
     handoff_to: code-reviewer
     branch_name: task-002-backend-implementation
+    impacted_scopes:
+      - "django_project/app"
+      - "django_project/project"
+    risk_level: medium
+    breaking_changes: false
     inputs:
       objective: "Implement backend/API updates"
       scope:

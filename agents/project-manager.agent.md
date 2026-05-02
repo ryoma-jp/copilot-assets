@@ -61,6 +61,27 @@ Notes:
 - Do not report requirement completion unless both artifact completion and process completion are satisfied.
 - If a task includes `.github/**` scope, keep `.github` changes out of delegated execution and record them as manual follow-up without blocking non-`.github` delivery.
 
+## Minimal Change Principles
+All implementation delegations must adhere to minimal change impact:
+
+### Change Scope Definition
+- **Isolate scope**: Each task modifies only files and modules listed in task `inputs` and `impacted_scopes`.
+- **Preserve API contracts**: Do not modify existing API signatures unless explicitly in `done_criteria`.
+- **Minimize touch points**: Prefer new modules/functions over modifying existing code paths.
+
+### Change Quality Criteria
+- **Single Responsibility**: Each change must be justified by exactly one requirement or task.
+- **Non-Breaking**: All changes must maintain backward compatibility or document breaking changes explicitly.
+- **Localized Impact**: Changes must not cascade beyond directly related dependencies.
+- **Risk Assessment**: Specialists must flag high-risk changes (multi-file edits, refactoring, API changes) in merge output.
+
+### Specialist Checklist (Before Merge)
+- [ ] All changes in scope per task `inputs`?
+- [ ] Existing APIs preserved or changes documented?
+- [ ] Minimal file count modified (< threshold for domain)?
+- [ ] No side effects outside task domain?
+- [ ] Backward compatibility verified?
+
 ## Entry Preconditions
 Before delegation loop begins, all must hold:
 1. `current.yaml` exists and includes at least one task.

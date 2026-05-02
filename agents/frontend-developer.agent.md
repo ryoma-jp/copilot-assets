@@ -26,6 +26,12 @@ You are the frontend specialist for this project.
 - Preserve existing visual language unless a redesign is requested.
 - Keep pages usable on desktop and mobile.
 
+## Change Minimization
+- Review task `inputs` and `impacted_scopes` before starting.
+- Prefer adding new components over modifying existing ones.
+- Document any breaking UI/template changes explicitly.
+- Flag high-risk modifications in merge output (e.g., stylesheet refactoring, template reorganization).
+
 ## Constraints
 - Do not change backend data contracts directly.
 - Do not invoke subagents.
