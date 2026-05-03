@@ -4,7 +4,7 @@ description: 'Use for post-implementation code review focused on correctness, re
 tools: [read, search]
 agents: []
 user-invocable: false
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: 'Provide changed files or PR scope, expected behavior, and critical risk areas'
 ---
 

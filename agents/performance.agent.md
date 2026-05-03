@@ -4,7 +4,7 @@ description: 'Use for performance analysis and optimization proposals across bac
 tools: [read, edit, search, execute]
 agents: []
 user-invocable: false
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: 'Provide observed bottleneck, workload context, and target performance goal'
 ---
 

@@ -4,7 +4,7 @@ description: 'Use for Docker Compose, nginx, scripts, runtime environment checks
 tools: [read, edit, search, execute]
 agents: []
 user-invocable: false
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: 'Provide infra or test objective and target environment constraints'
 ---
 

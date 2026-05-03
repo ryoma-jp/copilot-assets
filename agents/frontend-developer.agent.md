@@ -4,7 +4,7 @@ description: 'Use for Django template, CSS, and JavaScript implementation in UI 
 tools: [read, edit, search, execute]
 agents: []
 user-invocable: false
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: 'Provide target page, UX expectation, and acceptance criteria'
 ---
 

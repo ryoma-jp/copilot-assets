@@ -4,7 +4,7 @@ description: 'Use for architecture and design reviews before implementation. Eva
 tools: [read, search]
 agents: []
 user-invocable: false
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: 'Provide design scope, constraints, quality attributes, and design artifacts to review'
 ---
 

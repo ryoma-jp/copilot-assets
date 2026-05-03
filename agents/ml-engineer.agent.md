@@ -4,7 +4,7 @@ description: 'Use for machine learning pipeline changes including training, infe
 tools: [read, edit, search, execute]
 agents: []
 user-invocable: false
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: 'Provide model task, data assumptions, and expected metrics or outputs'
 ---
 

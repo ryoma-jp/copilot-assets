@@ -4,7 +4,7 @@ description: 'Use for Django backend implementation, DRF API changes, model upda
 tools: [read, edit, search, execute]
 agents: []
 user-invocable: false
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: 'Provide API/model/backend behavior change and acceptance criteria'
 ---
 

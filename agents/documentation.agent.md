@@ -4,7 +4,7 @@ description: 'Use for README, usage guides, architecture notes, and developer do
 tools: [read, edit, search, execute]
 agents: []
 user-invocable: false
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: 'Provide the feature or change that needs documentation updates'
 ---
 
